@@ -29,8 +29,8 @@ router.get(
 		Profile.findOne({ user: req.user.id })
 			.populate('user', ['name', 'avatar'])
 			.then(profile => {
-				errors.noprofile = 'There is no profile ';
 				if (!profile) {
+					errors.noprofile = 'There is no profile ';
 					return res.status(404).json(errors);
 				}
 				res.json(profile);
@@ -179,6 +179,8 @@ router.post(
 	'/experience',
 	passport.authenticate('jwt', { session: false }),
 	(req, res) => {
+		console.log(req.body);
+
 		const { errors, isValid } = validateExperienceInput(req.body);
 
 		// Check Validation

@@ -14,12 +14,7 @@ const validateLoginInput = require('../../validation/login');
 // Load User model
 const User = require('../../models/User');
 
-// @route   GET api/users/test
-// @desc    Tests users route
-// @access  Public
-router.get('/test', (req, res) => res.json({ msg: 'Users Works' }));
-
-// @route GET api/users/register
+// @route POST api/users/register
 // @desc Register user
 // @access Public
 router.post('/register', (req, res) => {
@@ -80,7 +75,7 @@ router.post('/login', (req, res) => {
 		// Check for user
 		if (!user) {
 			errors.email = 'User not found';
-			return res.status(404).json({ errors });
+			return res.status(404).json(errors);
 		}
 
 		// Check Password
